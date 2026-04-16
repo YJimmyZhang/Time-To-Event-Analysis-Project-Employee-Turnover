@@ -41,7 +41,7 @@ print(industry_health)
 print(profession_health)
 print(traffic_health)
 
-# looking for the 'elbow' where categories start having very few events
+# looking for the 'elbow' where categories start having very few events (naive approach)
 # check Industry
 ggplot(industry_health, aes(x = reorder(industry, -Total_Employees), y = Total_Employees)) +
   geom_bar(stat = "identity", fill = "skyblue") +
