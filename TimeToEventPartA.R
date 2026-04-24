@@ -106,7 +106,39 @@ data <- data %>%
     )
   )
 
+# Plot new Profession categories
+data %>%
+  group_by(profession_grouped) %>%
+  summarise(
+    Total_Employees = n(),
+    Events = sum(event)
+  ) %>%
+  ggplot(aes(x = reorder(profession_grouped, -Total_Employees), y = Total_Employees)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  geom_bar(aes(y = Events), stat = "identity", fill = "salmon") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10)) +
+  labs(title = "Turnover by Profession Family",
+       subtitle = "Post-transformation aggregated categories",
+       x = "Profession Group",
+       y = "Number of Employees")
 
+# Plot new Industry categories
+data %>%
+  group_by(industry_grouped) %>%
+  summarise(
+    Total_Employees = n(),
+    Events = sum(event)
+  ) %>%
+  ggplot(aes(x = reorder(industry_grouped, -Total_Employees), y = Total_Employees)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  geom_bar(aes(y = Events), stat = "identity", fill = "salmon") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10)) +
+  labs(title = "Turnover by Industry Sector",
+       subtitle = "Post-transformation aggregated categories",
+       x = "Industry Group",
+       y = "Number of Employees")
 
 
 # 4. Response variable and censoring analysis
